@@ -1,5 +1,6 @@
 import 'package:baity/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:baity/core/utils/values_manager.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageCardWidget extends StatelessWidget {
@@ -17,12 +18,12 @@ class ImageCardWidget extends StatelessWidget {
           height: context.setHeight(60),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(context.setMinSize(10)),
-            // image: image == null
-            //     ? null
-            //     : DecorationImage(
-            //         image: CachedNetworkImageProvider(image!),
-            //         fit: BoxFit.cover,
-            //       ),
+            image: image == null
+                ? null
+                : DecorationImage(
+                    image: CachedNetworkImageProvider(image!),
+                    fit: BoxFit.cover,
+                  ),
           ),
         ),
         Positioned(
