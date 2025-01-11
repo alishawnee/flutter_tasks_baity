@@ -7,6 +7,7 @@ class RealEstateViewModelState with _$RealEstateViewModelState {
     @Default([]) List<RealEstateModel> realEstates,
     @Default(1) int pageNumber,
     @Default(RequestState.initial) RequestState paginationRealEstateState,
+    @Default(false) bool loadMore,
     @Default(false) bool hasReachedMax,
   }) = _RealEstateViewModelState;
 }

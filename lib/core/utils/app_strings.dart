@@ -1,4 +1,37 @@
 class AppStrings {
+  static const String filter = "الفلتر";
+  static const String done = "تم";
+  static const String baghdad = "بغداد";
+  static const String offerType = "نوع العرض";
+  static const String rent = "ايجار";
+  static const String sale = "بيع";
+  static const String propertyType = "صنف و نوع العقار";
+  static const String payMethod = "طريقة الدفع";
+  static const String cash = "نقداً";
+  static const String governorateCityDistrict = "المحافظة والمدينة والمنطقة";
+  static const String results = "النتائج";
+  static const String filterButton = "فلتر";
+  static const String selectCity = "اختر المدينة";
+  static const String selectDistrict = " اختر المنطقة";
+  static const String realEstates = "العقارات";
+  static const String urgent = "عاجل";
+  static const String menu = "القائمة";
+  static const String maps = "الخرائط";
+  static const String views = "مشاهدات";
+  static const String daysAgo = "منذ";
+  static const String hours = "ساعة";
+  static const String bedrooms = "نوم";
+  static const String parking = "سيارة";
+  static const String bathrooms = "حمام";
+  static const String livingRoom = "جلوس";
+  static const String price = "السعر";
+  static const String publisher = "المعلن";
+  static const String details = "تفاصيل العقار";
+  static const String ownershipType = "نوع الملكية";
+  static const String adNumber = "رقم الاعلان";
+  static const String contact = "اتصال";
+  static const String cancelFields = "تفريغ الحقول";
+
   // error handler
   static const String serverConnectionError = "خطأ في الإتصال بالخادم";
   static const String fetchDataError = "فشل في جلب البيانات";

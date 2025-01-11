@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:baity/models/details_real_estate_model.dart';
 import 'package:baity/repositories/real_estate/real_estate_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -22,7 +20,6 @@ class DetailsRealEstateViewModel
       emit(DetailsRealEstateViewModelState.loaded(
           detailsRealEstate: detailsRealEstate));
     }, failure: (error) {
-      log(error.toString());
       emit(DetailsRealEstateViewModelState.error(error: error.message));
     });
   }

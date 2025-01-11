@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:baity/core/utils/enums.dart';
 import 'package:baity/models/real_estate_model.dart';
 import 'package:baity/repositories/real_estate/real_estate_repository.dart';
@@ -11,18 +9,23 @@ part 'real_estate_view_model_state.dart';
 
 class RealEstateViewModel extends Cubit<RealEstateViewModelState> {
   final RealEstateRepository realEstateRepository;
+
   RealEstateViewModel({required this.realEstateRepository})
       : super(RealEstateViewModelState());
+
   final int _pageSize = 10;
+
   Future getRealEstates() async {
     emit(state.copyWith(getRealEstatesState: RequestState.loading));
-    final result = await realEstateRepository.getRealEstates();
+    final result = await realEstateRepository.getRealEstates(
+      pageNumber: state.pageNumber,
+      pageSize: _pageSize,
+    );
+
     result.when(success: (realEstates) {
-      log(realEstates.length.toString());
       emit(state.copyWith(
           getRealEstatesState: RequestState.loaded, realEstates: realEstates));
     }, failure: (error) {
-      log(error.toString());
       emit(state.copyWith(getRealEstatesState: RequestState.error));
     });
   }
@@ -34,10 +37,11 @@ class RealEstateViewModel extends Cubit<RealEstateViewModelState> {
     }
 
     emit(state.copyWith(paginationRealEstateState: RequestState.loading));
-    final result = await realEstateRepository.paginationRealEstates(
+    final result = await realEstateRepository.getRealEstates(
       pageNumber: state.pageNumber + 1,
       pageSize: _pageSize,
     );
+
     result.when(success: (paginationRealEstates) {
       emit(state.copyWith(
         realEstates: [...state.realEstates, ...paginationRealEstates],
@@ -45,9 +49,7 @@ class RealEstateViewModel extends Cubit<RealEstateViewModelState> {
         hasReachedMax: paginationRealEstates.length < _pageSize,
         paginationRealEstateState: RequestState.loaded,
       ));
-      log(state.realEstates.length.toString());
     }, failure: (error) {
-      log(error.toString());
       emit(state.copyWith(paginationRealEstateState: RequestState.error));
     });
   }

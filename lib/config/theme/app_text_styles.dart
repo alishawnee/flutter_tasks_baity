@@ -1,139 +1,104 @@
+import 'package:baity/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'app_fonts.dart';
 
 class AppTextStyles {
   const AppTextStyles._();
-  // heading
-  static const TextStyle headingH6 = TextStyle(
-    fontSize: 18,
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 0,
-    height: 1.4,
+  static TextStyle font12WhiteMedium = TextStyle(
+    fontSize: AppFontSizing.s12,
+    color: AppColors.white,
+    fontWeight: FontWeightHelper.medium,
   );
 
-  static const headingH5 = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.w600,
-    fontSize: 20,
-    height: 1.4,
+  static TextStyle font14GryMedium = TextStyle(
+    fontSize: AppFontSizing.s14,
+    color: AppColors.gry,
+    fontWeight: FontWeightHelper.medium,
   );
 
-  static const headingH4 = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.bold,
-    fontSize: 24,
-    height: 1.5,
+  static TextStyle font16WhiteBold = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.white,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font14PrimaryLightBold = TextStyle(
+    fontSize: AppFontSizing.s14,
+    color: AppColors.primaryLight,
+    fontWeight: FontWeightHelper.bold,
   );
 
-  static const headingH3 = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.w600,
-    fontSize: 32,
-    height: 1.4,
+  static TextStyle font16PrimaryLightBold = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.primaryLight,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font18PrimaryLightBold = TextStyle(
+    fontSize: AppFontSizing.s18,
+    color: AppColors.primaryLight,
+    fontWeight: FontWeightHelper.bold,
   );
 
-  static const headingH2 = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.w600,
-    fontSize: 40,
-    height: 1.2,
+  static TextStyle font20PrimaryLightBold = TextStyle(
+    fontSize: AppFontSizing.s20,
+    color: AppColors.primaryLight,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font16Medium = TextStyle(
+    fontSize: AppFontSizing.s16,
+    fontWeight: FontWeightHelper.medium,
+  );
+  static TextStyle font16Blue600Medium = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.blue600,
+    fontWeight: FontWeightHelper.medium,
+  );
+  static TextStyle font16GryMedium = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.gry,
+    fontWeight: FontWeightHelper.medium,
+  );
+  static TextStyle font16GryBold = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.gry,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font16BlackBold = TextStyle(
+    fontSize: AppFontSizing.s16,
+    color: AppColors.black,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font20BlackBold = TextStyle(
+    fontSize: AppFontSizing.s20,
+    color: AppColors.black,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font18Blue600Medium = TextStyle(
+    fontSize: AppFontSizing.s18,
+    color: AppColors.blue600,
+    fontWeight: FontWeightHelper.medium,
+  );
+  static TextStyle font18WhiteBold = TextStyle(
+    fontSize: AppFontSizing.s18,
+    color: AppColors.white,
+    fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font20BlackMedium = TextStyle(
+    fontSize: AppFontSizing.s20,
+    color: AppColors.black,
+    fontWeight: FontWeightHelper.medium,
   );
 
-  static const headingH1 = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontWeight: FontWeight.w600,
-    fontSize: 48,
-    height: 1.2,
+  static TextStyle font20WhiteBold = TextStyle(
+    fontSize: AppFontSizing.s20,
+    color: AppColors.white,
+    height: 0,
+    fontWeight: FontWeightHelper.bold,
   );
 
-  // body xs
-  static const xsRegular = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 12,
-    height: 1.55,
-    letterSpacing: -0.24,
-  );
-  static const xsMedium = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-    height: 1.55,
-    letterSpacing: -0.24,
-  );
-
-  static const xsSemiBold = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 12,
-    fontWeight: FontWeight.w600,
-    height: 1.55,
-    letterSpacing: -0.24,
-  );
-
-  // body small
-  static const sRegular = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 14,
-    height: 1.55,
-    letterSpacing: -0.28,
-  );
-  static const sMedium = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    height: 1.55,
-    letterSpacing: -0.28,
-  );
-
-  static const sSemiBold = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    height: 1.55,
-    letterSpacing: -0.28,
-  );
-
-  // body medium
-  static const mRegular = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 16,
-    height: 1.6,
-    letterSpacing: -0.32,
-  );
-  static const mMedium = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    height: 1.6,
-    letterSpacing: -0.32,
-  );
-
-  static const mSemiBold = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    height: 1.6,
-    letterSpacing: -0.32,
-  );
-
-  // body medium
-  static const lRegular = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 18,
-    height: 1.55,
-  );
-  static const lMedium = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    height: 1.55,
-  );
-
-  static const lSemiBold = TextStyle(
-    fontFamily: AppFonts.manrope,
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    height: 1.55,
+  static TextStyle font20GryBold = TextStyle(
+    fontSize: AppFontSizing.s20,
+    color: AppColors.gry,
+    fontWeight: FontWeightHelper.bold,
   );
 }

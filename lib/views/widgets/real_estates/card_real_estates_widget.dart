@@ -1,9 +1,14 @@
-import 'package:baity/config/theme/app_fonts.dart';
+import 'package:baity/config/theme/app_colors.dart';
+import 'package:baity/config/theme/app_shadows.dart';
+import 'package:baity/config/theme/app_text_styles.dart';
 import 'package:baity/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:baity/core/responsive_helpers/size_provider.dart';
+import 'package:baity/core/utils/app_strings.dart';
 import 'package:baity/core/utils/values_manager.dart';
 import 'package:baity/models/real_estate_model.dart';
 import 'package:baity/views/widgets/real_estates/image_card_widget.dart';
+import 'package:baity/views/widgets/real_estates/info_icons_real_estate_widget.dart';
+import 'package:baity/views/widgets/real_estates/price_and_date_time_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,102 +24,73 @@ class CardRealEstatesWidget extends StatelessWidget {
       child: Builder(builder: (context) {
         return GestureDetector(
           onTap: () => context.push('/details-real-eastate/${realEstate.id}'),
-          child: Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(context.setWidth(10))),
-            elevation: 4,
-            margin: EdgeInsets.only(bottom: context.setMinSize(AppMargin.m16)),
-            child: Padding(
-              padding: EdgeInsets.all(context.setMinSize(10)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ImageCardWidget(
+          child: Container(
+            margin: EdgeInsets.only(bottom: context.setMinSize(AppMargin.m14)),
+            padding: EdgeInsets.all(context.setMinSize(AppPadding.p10)),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(context.setMinSize(15)),
+                border: realEstate.isUrgent ?? false
+                    ? Border.all(
+                        color: Theme.of(context).colorScheme.secondary,
+                        width: 2)
+                    : null,
+                boxShadow: [AppShadows.cardShadow]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: context.setMinSize(AppSpaceing.s6),
+              children: [
+                ImageCardWidget(
                     image: realEstate.image,
                     views: realEstate.views ?? 0,
                     imagesCount: realEstate.imagesCount ?? 0,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(context.setMinSize(AppPadding.p8)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${realEstate.price ?? 0} د.ع",
-                          style: TextStyle(
-                              fontSize: context.setSp(AppFontSizing.s16),
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal.shade900),
-                        ),
-                        SizedBox(height: context.setMinSize(AppSizing.s3)),
-                        Text(
-                          realEstate.title ?? '',
-                          style: TextStyle(
-                              fontSize: context.setSp(AppFontSizing.s14),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: context.setMinSize(AppSizing.s3)),
-                        Text(
-                          "${realEstate.category?.name ?? ''} - ${realEstate.subCategory?.name ?? ''}  |  المعلن: ${realEstate.ownerType ?? ''}",
-                          style: TextStyle(
-                              fontSize: context.setSp(AppFontSizing.s12),
-                              color: Colors.grey.shade600),
-                        ),
-                        SizedBox(height: context.setSp(AppSizing.s9)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _buildFeatureIcon(context, Icons.square_foot,
-                                '${realEstate.area ?? 0} م²'),
-                            _buildFeatureIcon(context, Icons.bathtub,
-                                '${realEstate.noOfBathRooms ?? 0}'),
-                            _buildFeatureIcon(context, Icons.room_preferences,
-                                '${realEstate.noOfBedRooms ?? 0}'),
-                            _buildFeatureIcon(context, Icons.directions_car,
-                                '${realEstate.noOfBathRooms ?? 0}'),
-                            _buildFeatureIcon(context, Icons.bed,
-                                '${realEstate.noOfLivingRooms ?? 0}'),
-                          ],
-                        ),
-                        SizedBox(height: context.setSp(AppSizing.s9)),
-                        Text(
-                          'بغداد - الكرخ - السيدية',
-                          style: TextStyle(
-                              fontSize: context.setSp(AppFontSizing.s12),
-                              color: Colors.grey.shade600),
-                        ),
-                      ],
+                    isUrgent: realEstate.isUrgent ?? false),
+                PriceAndDateTimeWidget(
+                    price: realEstate.price, dateTime: realEstate.createdAt),
+                Text(realEstate.title ?? '',
+                    style: AppTextStyles.font16BlackBold),
+                Text(
+                    "${realEstate.subCategory?.name ?? ''} - ${realEstate.category?.name ?? ''}  |  ${AppStrings.publisher}: ${realEstate.ownerType == "REALESTATE_AGENCY" ? 'مكتب عقاري' : 'مالك العقار'}",
+                    style: AppTextStyles.font16GryMedium),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InfoIconsRealEstateWidget(
+                        text: '${realEstate.area ?? 0} م²',
+                        icon: Icons.aspect_ratio),
+                    InfoIconsRealEstateWidget(
+                        text: '${realEstate.noOfLivingRooms ?? 0}',
+                        icon: Icons.chair_outlined),
+                    InfoIconsRealEstateWidget(
+                        text: '${realEstate.noOfBedRooms ?? 0}',
+                        icon: Icons.bedroom_parent_outlined),
+                    InfoIconsRealEstateWidget(
+                        text: '${realEstate.parkingCapacity ?? 0}',
+                        icon: Icons.car_crash_outlined),
+                    InfoIconsRealEstateWidget(
+                        text: '${realEstate.noOfBathRooms ?? 0}',
+                        icon: Icons.bathroom_outlined),
+                  ],
+                ),
+                Row(
+                  spacing: context.setMinSize(AppSpaceing.s3),
+                  children: [
+                    Icon(Icons.location_on,
+                        color: AppColors.blue600, size: context.setMinSize(18)),
+                    Flexible(
+                      child: Text(
+                        "${realEstate.city?.name ?? ''} - ${realEstate.district?.name ?? ''} - ${realEstate.subDistrict?.name ?? ''}",
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.font16Blue600Medium,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
       }),
-    );
-  }
-
-  Widget _buildFeatureIcon(BuildContext context, IconData icon, String label) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.setMinSize(AppPadding.p8),
-          vertical: context.setMinSize(AppPadding.p2)),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(context.setMinSize(20)),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: context.setMinSize(16), color: Colors.grey.shade600),
-          SizedBox(width: 4),
-          Text(label,
-              style: TextStyle(
-                  fontSize: context.setSp(AppFontSizing.s12),
-                  color: Colors.grey.shade600)),
-          SizedBox(width: 8),
-        ],
-      ),
     );
   }
 }

@@ -13,9 +13,7 @@ class DioConsumer implements ApiConsumer {
     client.options
       ..baseUrl = EndPoints.baseUrl
       ..headers = EndPoints.headerBearerOption
-      ..responseType = ResponseType.json
-      ..connectTimeout = const Duration(milliseconds: 5000)
-      ..receiveTimeout = const Duration(milliseconds: 5000);
+      ..responseType = ResponseType.json;
   }
 
   @override
@@ -82,7 +80,7 @@ class DioConsumer implements ApiConsumer {
 }
 
 dynamic _handleResponseAsJson(Response<dynamic> response) {
-  log('test in api consumer _handleResponseAsJson function  $response');
+  // log('test in api consumer _handleResponseAsJson function  $response');
   try {
     final responseJson = jsonDecode(response.data);
 

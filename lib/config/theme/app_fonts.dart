@@ -21,10 +21,12 @@ class FontWeightHelper {
 class AppFontSizing {
   const AppFontSizing._();
 
-  static const double s9 = 9;
-  static const double s12 = 12;
-  static const double s14 = 14;
-  static const double s16 = 16;
-  static const double s18 = 18;
-  static const double s20 = 20;
+  static const double s10 = 10.0;
+  static const double s12 = 12.0;
+  static const double s14 = 14.0;
+  static const double s16 = 16.0;
+  static const double s18 = 18.0;
+  static const double s20 = 20.0;
+  static const double s22 = 22.0;
+  static const double s24 = 24.0;
 }

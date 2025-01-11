@@ -7,28 +7,24 @@ class RealEstateApi {
   final ApiConsumer apiConsumer;
   const RealEstateApi({required this.apiConsumer});
 
-  Future<List<RealEstateModel>> getRealEstates() async {
-    final queryParameters = {
-      'PageSize': 15,
-      'PageNumber': 3,
-    };
-    final response = await apiConsumer.get(
-      EndPoints.realEstateList,
-      queryParameters: queryParameters,
-    );
-
-    final List<RealEstateModel> realEstates = List<RealEstateModel>.from(
-        response['payload'].map((json) => RealEstateModel.fromJson(json)));
-
-    return realEstates;
-  }
-
-  Future<List<RealEstateModel>> paginationRealEstates(
-      {required int pageNumber, required int pageSize}) async {
+  Future<List<RealEstateModel>> getRealEstates(
+      {required int pageNumber,
+      required int pageSize,
+      String? city,
+      String? district,
+      String? offerType,
+      String? subCategory,
+      String? category}) async {
     final queryParameters = {
       'PageSize': pageSize,
       'PageNumber': pageNumber,
+      'category': category,
+      'subCategory': subCategory,
+      'City': city,
+      'District': district,
+      'OfferType': offerType,
     };
+
     final response = await apiConsumer.get(
       EndPoints.realEstateList,
       queryParameters: queryParameters,
@@ -45,6 +41,9 @@ class RealEstateApi {
     final response =
         await apiConsumer.get(EndPoints.realEstateDetails(realEstateId));
 
-    return DetailsRealEstateModel.fromJson(response);
+    final DetailsRealEstateModel detailsRealEstateModel =
+        DetailsRealEstateModel.fromJson(await response['payload']);
+
+    return detailsRealEstateModel;
   }
 }
