@@ -1,28 +1,22 @@
-import 'package:baity/models/category_model.dart';
-import 'package:baity/models/city_model.dart';
-import 'package:baity/models/country_model.dart';
-import 'package:baity/models/district_model.dart';
-import 'package:baity/models/sub_category_model.dart';
-import 'package:baity/models/sub_district_model.dart';
-
 class DetailsRealEstateModel {
   final double? price;
   final String? id;
-  final String? createdAt;
+  final DateTime? createdAt;
   final String? updatedAt;
-
-  final CountryModel? country;
-  final CityModel? city;
-  final DistrictModel? district;
-  final SubDistrictModel? subDistrict;
-  final SubCategoryModel? subCategory;
-  final CategoryModel? category;
+  final User? user;
+  final Category? country;
+  final Category? city;
+  final Category? district;
+  final Category? subDistrict;
+  final Category? subCategory;
+  final Category? category;
   final String? ownerType;
   final dynamic subScriptionPlanId;
   final String? status;
   final String? phoneNumber;
   final int? area;
   final dynamic posterUrl;
+  final RealestateGroup? realestateGroup;
   final dynamic relestateSample;
   final bool? isFavorite;
   final String? title;
@@ -41,44 +35,46 @@ class DetailsRealEstateModel {
   final bool? isAddedFromDashboard;
   final String? expiresAt;
   final List<String>? images;
-  final dynamic video;
+  final String? video;
   final String? offerType;
   final String? payType;
   final String? ownershipType;
   final dynamic installmentDetails;
   final List<String>? features;
-  final dynamic age;
+  final int? age;
   final dynamic noOfRooms;
   final int? noOfBedRooms;
   final int? noOfBathRooms;
   final int? noOfLivingRooms;
-  final int? noOfFloors;
+  final dynamic noOfFloors;
   final dynamic noOfApartments;
   final int? parkingCapacity;
   final int? frontageWidth;
-  final double? frontageDepth;
-  final dynamic constructionArea;
+  final int? frontageDepth;
+  final int? constructionArea;
   final dynamic gardenArea;
-  final dynamic flooringType;
-  final dynamic claddingType;
-  final dynamic windowType;
+  final String? flooringType;
+  final String? claddingType;
+  final String? windowType;
   final String? nearbyType;
-  final dynamic facingDirection;
+  final String? facingDirection;
   final dynamic residencyType;
-  final bool? forGender;
+  final dynamic forGender;
   final dynamic buildingComplexGroup;
   final dynamic blockNumber;
   final dynamic buildingNumber;
-  final dynamic floorNumber;
+  final int? floorNumber;
   final dynamic flatNumber;
   final dynamic noOfUnits;
   final int? similarRealestatesCount;
+  final List<SimilarRealestate>? similarRealestates;
 
   DetailsRealEstateModel({
     this.price,
     this.id,
     this.createdAt,
     this.updatedAt,
+    this.user,
     this.country,
     this.city,
     this.district,
@@ -91,6 +87,7 @@ class DetailsRealEstateModel {
     this.phoneNumber,
     this.area,
     this.posterUrl,
+    this.realestateGroup,
     this.relestateSample,
     this.isFavorite,
     this.title,
@@ -141,36 +138,42 @@ class DetailsRealEstateModel {
     this.flatNumber,
     this.noOfUnits,
     this.similarRealestatesCount,
+    this.similarRealestates,
   });
 
   factory DetailsRealEstateModel.fromJson(Map<String, dynamic> json) =>
       DetailsRealEstateModel(
-        price: json["price"]?.toDouble(),
+        price: json['price'] != null ? (json['price'] as num).toDouble() : null,
         id: json["id"],
-        createdAt: json["createdAt"],
+        createdAt: json['createdAt'] != null
+            ? DateTime.parse(json['createdAt'])
+            : null,
         updatedAt: json["updatedAt"],
-        country: json["country"] == null
-            ? null
-            : CountryModel.fromJson(json["country"]),
-        city: json["city"] == null ? null : CityModel.fromJson(json["city"]),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        country:
+            json["country"] == null ? null : Category.fromJson(json["country"]),
+        city: json["city"] == null ? null : Category.fromJson(json["city"]),
         district: json["district"] == null
             ? null
-            : DistrictModel.fromJson(json["district"]),
+            : Category.fromJson(json["district"]),
         subDistrict: json["subDistrict"] == null
             ? null
-            : SubDistrictModel.fromJson(json["subDistrict"]),
+            : Category.fromJson(json["subDistrict"]),
         subCategory: json["subCategory"] == null
             ? null
-            : SubCategoryModel.fromJson(json["subCategory"]),
+            : Category.fromJson(json["subCategory"]),
         category: json["category"] == null
             ? null
-            : CategoryModel.fromJson(json["category"]),
+            : Category.fromJson(json["category"]),
         ownerType: json["ownerType"],
         subScriptionPlanId: json["subScriptionPlanId"],
         status: json["status"],
         phoneNumber: json["phoneNumber"],
         area: json["area"],
         posterUrl: json["posterUrl"],
+        realestateGroup: json["realestateGroup"] == null
+            ? null
+            : RealestateGroup.fromJson(json["realestateGroup"]),
         relestateSample: json["relestateSample"],
         isFavorite: json["isFavorite"],
         title: json["title"],
@@ -208,7 +211,7 @@ class DetailsRealEstateModel {
         noOfApartments: json["noOfApartments"],
         parkingCapacity: json["parkingCapacity"],
         frontageWidth: json["frontageWidth"],
-        frontageDepth: json["frontageDepth"]?.toDouble(),
+        frontageDepth: json["frontageDepth"],
         constructionArea: json["constructionArea"],
         gardenArea: json["gardenArea"],
         flooringType: json["flooringType"],
@@ -225,6 +228,10 @@ class DetailsRealEstateModel {
         flatNumber: json["flatNumber"],
         noOfUnits: json["noOfUnits"],
         similarRealestatesCount: json["similarRealestatesCount"],
+        similarRealestates: json["similarRealestates"] == null
+            ? []
+            : List<SimilarRealestate>.from(json["similarRealestates"]!
+                .map((x) => SimilarRealestate.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -232,6 +239,7 @@ class DetailsRealEstateModel {
         "id": id,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
+        "user": user?.toJson(),
         "country": country?.toJson(),
         "city": city?.toJson(),
         "district": district?.toJson(),
@@ -244,6 +252,7 @@ class DetailsRealEstateModel {
         "phoneNumber": phoneNumber,
         "area": area,
         "posterUrl": posterUrl,
+        "realestateGroup": realestateGroup?.toJson(),
         "relestateSample": relestateSample,
         "isFavorite": isFavorite,
         "title": title,
@@ -296,5 +305,319 @@ class DetailsRealEstateModel {
         "flatNumber": flatNumber,
         "noOfUnits": noOfUnits,
         "similarRealestatesCount": similarRealestatesCount,
+        "similarRealestates": similarRealestates == null
+            ? []
+            : List<dynamic>.from(similarRealestates!.map((x) => x.toJson())),
+      };
+}
+
+class Category {
+  final String? id;
+  final String? name;
+
+  Category({
+    this.id,
+    this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
+}
+
+class RealestateGroup {
+  final String? id;
+  final String? logoUrl;
+  final String? name;
+  final String? type;
+  final List<dynamic>? constructionCompanyTypes;
+  final Category? country;
+  final Category? city;
+  final Category? district;
+  final Category? subDistrict;
+  final SocialLinks? socialLinks;
+  final int? realestateCount;
+
+  RealestateGroup({
+    this.id,
+    this.logoUrl,
+    this.name,
+    this.type,
+    this.constructionCompanyTypes,
+    this.country,
+    this.city,
+    this.district,
+    this.subDistrict,
+    this.socialLinks,
+    this.realestateCount,
+  });
+
+  factory RealestateGroup.fromJson(Map<String, dynamic> json) =>
+      RealestateGroup(
+        id: json["id"],
+        logoUrl: json["logoUrl"],
+        name: json["name"],
+        type: json["type"],
+        constructionCompanyTypes: json["constructionCompanyTypes"] == null
+            ? []
+            : List<dynamic>.from(
+                json["constructionCompanyTypes"]!.map((x) => x)),
+        country:
+            json["country"] == null ? null : Category.fromJson(json["country"]),
+        city: json["city"] == null ? null : Category.fromJson(json["city"]),
+        district: json["district"] == null
+            ? null
+            : Category.fromJson(json["district"]),
+        subDistrict: json["subDistrict"] == null
+            ? null
+            : Category.fromJson(json["subDistrict"]),
+        socialLinks: json["socialLinks"] == null
+            ? null
+            : SocialLinks.fromJson(json["socialLinks"]),
+        realestateCount: json["realestateCount"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "logoUrl": logoUrl,
+        "name": name,
+        "type": type,
+        "constructionCompanyTypes": constructionCompanyTypes == null
+            ? []
+            : List<dynamic>.from(constructionCompanyTypes!.map((x) => x)),
+        "country": country?.toJson(),
+        "city": city?.toJson(),
+        "district": district?.toJson(),
+        "subDistrict": subDistrict?.toJson(),
+        "socialLinks": socialLinks?.toJson(),
+        "realestateCount": realestateCount,
+      };
+}
+
+class SocialLinks {
+  final String? email;
+  final String? facebook;
+  final String? instagram;
+  final String? link;
+  final String? twitter;
+  final String? youtube;
+
+  SocialLinks({
+    this.email,
+    this.facebook,
+    this.instagram,
+    this.link,
+    this.twitter,
+    this.youtube,
+  });
+
+  factory SocialLinks.fromJson(Map<String, dynamic> json) => SocialLinks(
+        email: json["email"],
+        facebook: json["facebook"],
+        instagram: json["instagram"],
+        link: json["link"],
+        twitter: json["twitter"],
+        youtube: json["youtube"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "email": email,
+        "facebook": facebook,
+        "instagram": instagram,
+        "link": link,
+        "twitter": twitter,
+        "youtube": youtube,
+      };
+}
+
+class SimilarRealestate {
+  final String? id;
+  final String? createdAt;
+  final String? title;
+  final String? ownerType;
+  final String? ownerName;
+  final String? ownerImageUrl;
+  final String? offerType;
+  final double? lat;
+  final double? lng;
+  final double? price;
+  final double? area;
+  final int? views;
+  final int? imagesCount;
+  final bool? hasVideo;
+  final bool? isUrgent;
+  final int? age;
+  final dynamic noOfRooms;
+  final int? noOfBedRooms;
+  final int? noOfBathRooms;
+  final int? noOfLivingRooms;
+  final int? noOfFloors;
+  final int? parkingCapacity;
+  final String? image;
+  final dynamic buildingComplexGroup;
+  final Category? country;
+  final Category? city;
+  final Category? district;
+  final Category? subDistrict;
+  final Category? category;
+  final Category? subCategory;
+
+  SimilarRealestate({
+    this.id,
+    this.createdAt,
+    this.title,
+    this.ownerType,
+    this.ownerName,
+    this.ownerImageUrl,
+    this.offerType,
+    this.lat,
+    this.lng,
+    this.price,
+    this.area,
+    this.views,
+    this.imagesCount,
+    this.hasVideo,
+    this.isUrgent,
+    this.age,
+    this.noOfRooms,
+    this.noOfBedRooms,
+    this.noOfBathRooms,
+    this.noOfLivingRooms,
+    this.noOfFloors,
+    this.parkingCapacity,
+    this.image,
+    this.buildingComplexGroup,
+    this.country,
+    this.city,
+    this.district,
+    this.subDistrict,
+    this.category,
+    this.subCategory,
+  });
+
+  factory SimilarRealestate.fromJson(Map<String, dynamic> json) =>
+      SimilarRealestate(
+        id: json["id"],
+        createdAt: json["createdAt"],
+        title: json["title"],
+        ownerType: json["ownerType"],
+        ownerName: json["ownerName"],
+        ownerImageUrl: json["ownerImageUrl"],
+        offerType: json["offerType"],
+        lat: json["lat"]?.toDouble(),
+        lng: json["lng"]?.toDouble(),
+        price: json["price"]?.toDouble(),
+        area: json["area"]?.toDouble(),
+        views: json["views"],
+        imagesCount: json["imagesCount"],
+        hasVideo: json["hasVideo"],
+        isUrgent: json["isUrgent"],
+        age: json["age"],
+        noOfRooms: json["noOfRooms"],
+        noOfBedRooms: json["noOfBedRooms"],
+        noOfBathRooms: json["noOfBathRooms"],
+        noOfLivingRooms: json["noOfLivingRooms"],
+        noOfFloors: json["noOfFloors"],
+        parkingCapacity: json["parkingCapacity"],
+        image: json["image"],
+        buildingComplexGroup: json["buildingComplexGroup"],
+        country:
+            json["country"] == null ? null : Category.fromJson(json["country"]),
+        city: json["city"] == null ? null : Category.fromJson(json["city"]),
+        district: json["district"] == null
+            ? null
+            : Category.fromJson(json["district"]),
+        subDistrict: json["subDistrict"] == null
+            ? null
+            : Category.fromJson(json["subDistrict"]),
+        category: json["category"] == null
+            ? null
+            : Category.fromJson(json["category"]),
+        subCategory: json["subCategory"] == null
+            ? null
+            : Category.fromJson(json["subCategory"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "createdAt": createdAt,
+        "title": title,
+        "ownerType": ownerType,
+        "ownerName": ownerName,
+        "ownerImageUrl": ownerImageUrl,
+        "offerType": offerType,
+        "lat": lat,
+        "lng": lng,
+        "price": price,
+        "area": area,
+        "views": views,
+        "imagesCount": imagesCount,
+        "hasVideo": hasVideo,
+        "isUrgent": isUrgent,
+        "age": age,
+        "noOfRooms": noOfRooms,
+        "noOfBedRooms": noOfBedRooms,
+        "noOfBathRooms": noOfBathRooms,
+        "noOfLivingRooms": noOfLivingRooms,
+        "noOfFloors": noOfFloors,
+        "parkingCapacity": parkingCapacity,
+        "image": image,
+        "buildingComplexGroup": buildingComplexGroup,
+        "country": country?.toJson(),
+        "city": city?.toJson(),
+        "district": district?.toJson(),
+        "subDistrict": subDistrict?.toJson(),
+        "category": category?.toJson(),
+        "subCategory": subCategory?.toJson(),
+      };
+}
+
+class User {
+  final String? firstName;
+  final String? lastName;
+  final String? image;
+  final String? email;
+  final String? phoneNumber;
+  final int? realestateCount;
+  final String? id;
+  final String? username;
+
+  User({
+    this.firstName,
+    this.lastName,
+    this.image,
+    this.email,
+    this.phoneNumber,
+    this.realestateCount,
+    this.id,
+    this.username,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        image: json["image"],
+        email: json["email"],
+        phoneNumber: json["phoneNumber"],
+        realestateCount: json["realestateCount"],
+        id: json["id"],
+        username: json["username"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "image": image,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "realestateCount": realestateCount,
+        "id": id,
+        "username": username,
       };
 }

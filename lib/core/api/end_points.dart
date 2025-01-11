@@ -7,15 +7,17 @@ class EndPoints {
   };
 
   // * PATHS
-  static String shopPath = "$baseUrl/shop";
-  static String accountPath = "$baseUrl/user";
-
   static const String clientPath = '/client';
-  // static const String dashboardPath = '/dashboard';
-  // static const String version1Path = '/v1';
+  static const String dashboardPath = '/dashboard';
+  static const String version1Path = '/v1';
 
   // * END POINTS
   static const String realEstateList = '$clientPath/Realestate';
   static String realEstateDetails(String realestateId) =>
       '$clientPath/Realestate/$realestateId';
+
+  static const String category = '$dashboardPath/Category';
+  static const String subCategory = '$dashboardPath/SubCategory';
+  static const String city = '$version1Path/$dashboardPath/City';
+  static const String district = '$version1Path/$dashboardPath/District';
 }

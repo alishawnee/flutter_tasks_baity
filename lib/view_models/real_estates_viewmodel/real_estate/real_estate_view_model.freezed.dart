@@ -21,6 +21,7 @@ mixin _$RealEstateViewModelState {
   int get pageNumber => throw _privateConstructorUsedError;
   RequestState get paginationRealEstateState =>
       throw _privateConstructorUsedError;
+  bool get loadMore => throw _privateConstructorUsedError;
   bool get hasReachedMax => throw _privateConstructorUsedError;
 
   /// Create a copy of RealEstateViewModelState
@@ -41,6 +42,7 @@ abstract class $RealEstateViewModelStateCopyWith<$Res> {
       List<RealEstateModel> realEstates,
       int pageNumber,
       RequestState paginationRealEstateState,
+      bool loadMore,
       bool hasReachedMax});
 }
 
@@ -64,6 +66,7 @@ class _$RealEstateViewModelStateCopyWithImpl<$Res,
     Object? realEstates = null,
     Object? pageNumber = null,
     Object? paginationRealEstateState = null,
+    Object? loadMore = null,
     Object? hasReachedMax = null,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +86,10 @@ class _$RealEstateViewModelStateCopyWithImpl<$Res,
           ? _value.paginationRealEstateState
           : paginationRealEstateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
+      loadMore: null == loadMore
+          ? _value.loadMore
+          : loadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasReachedMax: null == hasReachedMax
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -105,6 +112,7 @@ abstract class _$$RealEstateViewModelStateImplCopyWith<$Res>
       List<RealEstateModel> realEstates,
       int pageNumber,
       RequestState paginationRealEstateState,
+      bool loadMore,
       bool hasReachedMax});
 }
 
@@ -127,6 +135,7 @@ class __$$RealEstateViewModelStateImplCopyWithImpl<$Res>
     Object? realEstates = null,
     Object? pageNumber = null,
     Object? paginationRealEstateState = null,
+    Object? loadMore = null,
     Object? hasReachedMax = null,
   }) {
     return _then(_$RealEstateViewModelStateImpl(
@@ -146,6 +155,10 @@ class __$$RealEstateViewModelStateImplCopyWithImpl<$Res>
           ? _value.paginationRealEstateState
           : paginationRealEstateState // ignore: cast_nullable_to_non_nullable
               as RequestState,
+      loadMore: null == loadMore
+          ? _value.loadMore
+          : loadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasReachedMax: null == hasReachedMax
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -162,6 +175,7 @@ class _$RealEstateViewModelStateImpl implements _RealEstateViewModelState {
       final List<RealEstateModel> realEstates = const [],
       this.pageNumber = 1,
       this.paginationRealEstateState = RequestState.initial,
+      this.loadMore = false,
       this.hasReachedMax = false})
       : _realEstates = realEstates;
 
@@ -185,11 +199,14 @@ class _$RealEstateViewModelStateImpl implements _RealEstateViewModelState {
   final RequestState paginationRealEstateState;
   @override
   @JsonKey()
+  final bool loadMore;
+  @override
+  @JsonKey()
   final bool hasReachedMax;
 
   @override
   String toString() {
-    return 'RealEstateViewModelState(getRealEstatesState: $getRealEstatesState, realEstates: $realEstates, pageNumber: $pageNumber, paginationRealEstateState: $paginationRealEstateState, hasReachedMax: $hasReachedMax)';
+    return 'RealEstateViewModelState(getRealEstatesState: $getRealEstatesState, realEstates: $realEstates, pageNumber: $pageNumber, paginationRealEstateState: $paginationRealEstateState, loadMore: $loadMore, hasReachedMax: $hasReachedMax)';
   }
 
   @override
@@ -206,6 +223,8 @@ class _$RealEstateViewModelStateImpl implements _RealEstateViewModelState {
             (identical(other.paginationRealEstateState,
                     paginationRealEstateState) ||
                 other.paginationRealEstateState == paginationRealEstateState) &&
+            (identical(other.loadMore, loadMore) ||
+                other.loadMore == loadMore) &&
             (identical(other.hasReachedMax, hasReachedMax) ||
                 other.hasReachedMax == hasReachedMax));
   }
@@ -217,6 +236,7 @@ class _$RealEstateViewModelStateImpl implements _RealEstateViewModelState {
       const DeepCollectionEquality().hash(_realEstates),
       pageNumber,
       paginationRealEstateState,
+      loadMore,
       hasReachedMax);
 
   /// Create a copy of RealEstateViewModelState
@@ -235,6 +255,7 @@ abstract class _RealEstateViewModelState implements RealEstateViewModelState {
       final List<RealEstateModel> realEstates,
       final int pageNumber,
       final RequestState paginationRealEstateState,
+      final bool loadMore,
       final bool hasReachedMax}) = _$RealEstateViewModelStateImpl;
 
   @override
@@ -245,6 +266,8 @@ abstract class _RealEstateViewModelState implements RealEstateViewModelState {
   int get pageNumber;
   @override
   RequestState get paginationRealEstateState;
+  @override
+  bool get loadMore;
   @override
   bool get hasReachedMax;
 

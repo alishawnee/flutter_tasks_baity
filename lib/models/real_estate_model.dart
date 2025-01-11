@@ -16,7 +16,7 @@ class RealEstateModel {
   final double? lat;
   final double? lng;
   final double? price;
-  final int? area;
+  final double? area;
   final int? views;
   final int? imagesCount;
   final bool? hasVideo;
@@ -81,7 +81,7 @@ class RealEstateModel {
       lat: json['lat'] != null ? (json['lat'] as num).toDouble() : null,
       lng: json['lng'] != null ? (json['lng'] as num).toDouble() : null,
       price: json['price'] != null ? (json['price'] as num).toDouble() : null,
-      area: json['area'],
+      area: json['area'] != null ? (json['area'] as num).toDouble() : null,
       views: json['views'],
       imagesCount: json['imagesCount'],
       hasVideo: json['hasVideo'],
@@ -111,5 +111,39 @@ class RealEstateModel {
           ? SubCategoryModel.fromJson(json['subCategory'])
           : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'createdAt': createdAt?.toIso8601String(),
+      'title': title,
+      'ownerType': ownerType,
+      'ownerName': ownerName,
+      'ownerImageUrl': ownerImageUrl,
+      'offerType': offerType,
+      'lat': lat,
+      'lng': lng,
+      'price': price,
+      'area': area,
+      'views': views,
+      'imagesCount': imagesCount,
+      'hasVideo': hasVideo,
+      'isUrgent': isUrgent,
+      'age': age,
+      'noOfRooms': noOfRooms,
+      'noOfBedRooms': noOfBedRooms,
+      'noOfBathRooms': noOfBathRooms,
+      'noOfLivingRooms': noOfLivingRooms,
+      'noOfFloors': noOfFloors,
+      'parkingCapacity': parkingCapacity,
+      'image': image,
+      'country': country?.toJson(),
+      'city': city?.toJson(),
+      'district': district?.toJson(),
+      'subDistrict': subDistrict?.toJson(),
+      'category': category?.toJson(),
+      'subCategory': subCategory?.toJson(),
+    };
   }
 }
